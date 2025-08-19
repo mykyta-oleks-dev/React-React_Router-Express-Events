@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useFetcher } from 'react-router-dom';
+import { useFetcher } from 'react-router';
 
 import classes from './NewsletterSignup.module.css';
 

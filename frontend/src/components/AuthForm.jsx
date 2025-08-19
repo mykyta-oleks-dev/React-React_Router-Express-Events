@@ -1,18 +1,16 @@
-import { useState } from 'react';
-import { Form } from 'react-router-dom';
+import { Form, Link, useSearchParams } from 'react-router';
 
 import classes from './AuthForm.module.css';
 
 function AuthForm() {
-	const [isLogin, setIsLogin] = useState(true);
-
-	function switchAuthHandler() {
-		setIsLogin((isCurrentlyLogin) => !isCurrentlyLogin);
-	}
+	const [searchParams] = useSearchParams();
+	const mode = searchParams.get('mode');
+	const isLogin = !mode || mode === 'login';
+	const otherMode = isLogin ? 'signup' : 'login';
 
 	return (
 		<Form method="post" className={classes.form}>
-			<h1>{isLogin ? 'Log in' : 'Create a new user'}</h1>
+			<h1>{isLogin ? 'Log in' : 'Sign up'}</h1>
 			<p>
 				<label htmlFor="email">Email</label>
 				<input id="email" type="email" name="email" required />
@@ -22,10 +20,12 @@ function AuthForm() {
 				<input id="password" type="password" name="password" required />
 			</p>
 			<div className={classes.actions}>
-				<button onClick={switchAuthHandler} type="button">
-					{isLogin ? 'Create new user' : 'Login'}
-				</button>
-				<button>Save</button>
+				<Link to={`?mode=${otherMode}`}>
+					{isLogin
+						? 'Create new account'
+						: 'Log in with existing account'}
+				</Link>
+				<button>Submit</button>
 			</div>
 		</Form>
 	);

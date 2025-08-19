@@ -1,4 +1,4 @@
-import { Await, useRouteLoaderData } from 'react-router-dom';
+import { Await, useRouteLoaderData } from 'react-router';
 
 import EventForm from '../components/EventForm';
 import { Suspense } from 'react';

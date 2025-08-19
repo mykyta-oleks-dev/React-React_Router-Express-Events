@@ -4,7 +4,7 @@ import {
 	useNavigation,
 	useActionData,
 	redirect,
-} from 'react-router-dom';
+} from 'react-router';
 
 import classes from './EventForm.module.css';
 

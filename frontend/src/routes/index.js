@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router';
 import EditEventPage from '../pages/EditEvent';
 import ErrorPage from '../pages/Error';
 import EventDetailsPage, {
@@ -12,6 +12,7 @@ import NewEventPage from '../pages/NewEvent';
 import RootLayout from '../pages/Root';
 import { formAction } from '../components/EventForm';
 import NewsletterPage, { newsletterAction } from '../pages/Newsletter';
+import AuthenticationPage from '../pages/Authentication';
 
 const router = createBrowserRouter([
 	{
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
 				path: 'newsletter',
 				element: <NewsletterPage />,
 				action: newsletterAction,
+			},
+			{
+				path: 'auth',
+				element: <AuthenticationPage />,
 			},
 		],
 	},
