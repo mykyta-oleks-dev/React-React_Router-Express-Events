@@ -1,5 +1,6 @@
 import { redirect } from 'react-router';
 import AuthForm from '../components/AuthForm';
+import { setAuthToken } from '../util/auth';
 
 function AuthenticationPage() {
 	return <AuthForm />;
@@ -29,16 +30,21 @@ export const authAction = async ({ request }) => {
 		body: JSON.stringify(authData),
 	});
 
-	if (res.status === 422 || res.status === 401) {
+	if ([422, 401, 404].includes(res.status)) {
 		return res;
 	}
 
+	const resData = await res.json();
+
 	if (!res.ok) {
-		throw new Response(
-			{ message: 'Could not authenticate user' },
-			{ status: 500 }
-		);
+		throw { message: 'Could not authenticate user', status: 500 };
 	}
+
+	if (!resData.token) {
+		throw { message: 'Token not provided by the server', status: 500 };
+	}
+
+	setAuthToken(resData.token);
 
 	return redirect('/');
 };

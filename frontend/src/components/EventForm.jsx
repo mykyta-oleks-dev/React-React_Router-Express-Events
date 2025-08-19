@@ -7,6 +7,7 @@ import {
 } from 'react-router';
 
 import classes from './EventForm.module.css';
+import { getAuthToken } from '../util/auth';
 
 function EventForm({ method, event }) {
 	const data = useActionData();
@@ -104,9 +105,13 @@ export async function formAction({ request, params }) {
 		url = 'http://localhost:8080/events/' + id;
 	}
 
+	const token = getAuthToken();
+	if (!token) throw { status: 401 };
+
 	const response = await fetch(url, {
 		method: method,
 		headers: {
+			Authorization: `Bearer ${token}`,
 			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify(eventData),
@@ -117,7 +122,11 @@ export async function formAction({ request, params }) {
 	}
 
 	if (!response.ok) {
-		throw response;
+		const data = await response.json();
+		throw {
+			status: response.status,
+			message: data?.message ?? 'An unexpected error',
+		};
 	}
 
 	return redirect('/events');

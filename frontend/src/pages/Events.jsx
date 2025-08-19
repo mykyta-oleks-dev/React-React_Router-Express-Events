@@ -17,12 +17,18 @@ const EventsPage = () => {
 export default EventsPage;
 
 export const eventsLoader = async () => {
-	const eventsPromise = fetch('http://localhost:8080/events').then((res) => {
-		if (!res.ok) {
-			throw res;
+	const eventsPromise = fetch('http://localhost:8080/events').then(
+		async (res) => {
+			if (!res.ok) {
+				const data = await res.json();
+				throw {
+					status: res.status,
+					message: data?.message ?? 'An unexpected error',
+				};
+			}
+			return res.json();
 		}
-		return res.json();
-	});
+	);
 
 	return {
 		data: eventsPromise,

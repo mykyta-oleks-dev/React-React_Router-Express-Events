@@ -50,7 +50,7 @@ router.post('/login', async (req, res) => {
   try {
     user = await get(email);
   } catch (error) {
-    return res.status(401).json({ message: 'Authentication failed.' });
+    return res.status(404).json({ message: 'User not found.' });
   }
 
   const pwIsValid = await isValidPassword(password, user.password);
