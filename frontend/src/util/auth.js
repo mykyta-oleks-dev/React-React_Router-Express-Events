@@ -12,3 +12,11 @@ export function logoutAction() {
 	localStorage.removeItem('token');
 	return redirect('/');
 }
+
+export function checkAuthLoader() {
+	if (!getAuthToken()) {
+		return redirect('/auth');
+	}
+
+	return null;
+}

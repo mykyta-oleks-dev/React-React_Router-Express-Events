@@ -106,7 +106,6 @@ export async function formAction({ request, params }) {
 	}
 
 	const token = getAuthToken();
-	if (!token) throw { status: 401 };
 
 	const response = await fetch(url, {
 		method: method,

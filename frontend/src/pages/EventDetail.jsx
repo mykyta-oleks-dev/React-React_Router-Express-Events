@@ -35,7 +35,6 @@ export async function detailsLoader({ params }) {
 
 export async function deleteEventAction({ request, params }) {
 	const token = getAuthToken();
-	if (!token) throw { status: 401 };
 
 	const res = await fetch('http://localhost:8080/events/' + params.id, {
 		method: request.method,

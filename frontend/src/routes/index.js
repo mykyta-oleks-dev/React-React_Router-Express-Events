@@ -13,7 +13,7 @@ import HomePage from '../pages/Home';
 import NewEventPage from '../pages/NewEvent';
 import NewsletterPage, { newsletterAction } from '../pages/Newsletter';
 import RootLayout, { rootLoader } from '../pages/Root';
-import { logoutAction } from '../util/auth';
+import { checkAuthLoader, logoutAction } from '../util/auth';
 
 const router = createBrowserRouter([
 	{
@@ -47,6 +47,7 @@ const router = createBrowserRouter([
 								path: 'edit',
 								element: <EditEventPage />,
 								action: formAction,
+								loader: checkAuthLoader,
 							},
 						],
 					},
@@ -54,6 +55,7 @@ const router = createBrowserRouter([
 						path: 'new',
 						element: <NewEventPage />,
 						action: formAction,
+						loader: checkAuthLoader,
 					},
 				],
 			},
