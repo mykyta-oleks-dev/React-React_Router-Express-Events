@@ -20,7 +20,7 @@ export function getAuthTokenDuration() {
 	if (!tokenExpiration) return -1;
 
 	const expiration = new Date(tokenExpiration);
-	const now = Date.now();
+	const now = new Date();
 	return expiration.getTime() - now.getTime();
 }
 
