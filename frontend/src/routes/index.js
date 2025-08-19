@@ -1,24 +1,27 @@
 import { createBrowserRouter } from 'react-router';
+import { formAction } from '../components/EventForm';
+import AuthenticationPage, { authAction } from '../pages/Authentication';
 import EditEventPage from '../pages/EditEvent';
 import ErrorPage from '../pages/Error';
 import EventDetailsPage, {
-	detailsLoader,
 	deleteEventAction,
+	detailsLoader,
 } from '../pages/EventDetail';
 import EventsPage, { eventsLoader } from '../pages/Events';
 import EventsRootLayout from '../pages/EventsRoot';
 import HomePage from '../pages/Home';
 import NewEventPage from '../pages/NewEvent';
-import RootLayout from '../pages/Root';
-import { formAction } from '../components/EventForm';
 import NewsletterPage, { newsletterAction } from '../pages/Newsletter';
-import AuthenticationPage, { authAction } from '../pages/Authentication';
+import RootLayout, { rootLoader } from '../pages/Root';
+import { logoutAction } from '../util/auth';
 
 const router = createBrowserRouter([
 	{
 		path: '/',
+		id: 'root',
 		element: <RootLayout />,
 		errorElement: <ErrorPage />,
+		loader: rootLoader,
 		children: [
 			{ index: true, element: <HomePage /> },
 			{
@@ -63,6 +66,10 @@ const router = createBrowserRouter([
 				path: 'auth',
 				element: <AuthenticationPage />,
 				action: authAction,
+			},
+			{
+				path: 'logout',
+				action: logoutAction,
 			},
 		],
 	},
