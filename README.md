@@ -1,6 +1,6 @@
 # Description
 
-This is a React (+ Express) application for managing public events. Create your usercreate data about the event you like or browse the list of events that there are!
+This is a React (+ Express) application for managing public events. Create your user account and manage the events or browse the list of events that there are!
 
 ## Technologies used
 
